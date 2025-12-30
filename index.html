@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X++ Graphics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: 'Space Grotesk', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .section-divider {
+            border-top: 1px solid #000000;
+        }
+
+        /* Floating Side Nav Styles */
+        .side-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 1rem;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .nav-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+            background: #000;
+            color: #fff;
+            padding: 4px 12px;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .nav-item:hover .nav-label {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #000;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item:hover .nav-icon {
+            background: #000;
+            color: #fff;
+        }
+
+        .project-card {
+            border: 1px solid #000000;
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .media-container {
+            width: 100%;
+            height: 220px;
+            background: #eee;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid #000;
+        }
+
+        .media-container video, .media-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 99px;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            pointer-events: none;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Floating Side Navigation -->
+    <div class="side-nav hidden lg:flex">
+        <a href="https://github.com" target="_blank" class="nav-item">
+            <span class="nav-label">Source Code</span>
+            <div class="nav-icon"><i class="fab fa-github"></i></div>
+        </a>
+        <a href="#projects" class="nav-item">
+            <span class="nav-label">Project Index</span>
+            <div class="nav-icon"><i class="fas fa-project-diagram"></i></div>
+        </a>
+        <a href="#docs" class="nav-item">
+            <span class="nav-label">Documentation</span>
+            <div class="nav-icon"><i class="fas fa-book"></i></div>
+        </a>
+    </div>
+
+    <!-- Minimal Nav -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold tracking-tighter">X++ <span class="font-light">GRAPHICS</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-12">
+                    <a href="#about" class="text-sm font-medium uppercase tracking-widest hover:line-through">Manifesto</a>
+                    <a href="#projects" class="text-sm font-medium uppercase tracking-widest hover:line-through">Projects</a>
+                    <a href="#docs" class="text-sm font-medium uppercase tracking-widest hover:line-through">API</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-48 pb-24 px-6">
+        <div class="max-w-4xl">
+            <div class="text-xs font-bold uppercase tracking-[0.3em] mb-4 text-gray-500">Python Hardware-Accelerated Rendering</div>
+            <h1 class="text-6xl md:text-8xl font-bold tracking-tighter leading-none mb-10">
+                X++ GRAPHICS API.
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl leading-relaxed">
+                A lightweight, modular graphics and simulation framework built from scratch in Python. Design complex systems with minimal overhead and maximum clarity.
+            </p>
+            <div class="flex flex-wrap gap-6">
+                <button class="bg-black text-white px-10 py-4 font-bold uppercase tracking-widest hover:bg-white hover:text-black border border-black transition">Start Coding</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Gallery -->
+    <section id="projects" class="py-24 px-6 section-divider bg-[#fafafa]">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+                <div>
+                    <h2 class="text-5xl font-bold tracking-tighter mb-4">Project Archetypes</h2>
+                    <p class="text-gray-500 max-w-md">Modular implementations exploring physics, biology, and game development.</p>
+                </div>
+                <div class="text-sm tracking-widest text-black font-bold uppercase">Inventory // 06</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 01: Video -->
+                <div class="project-card">
+                    <div class="media-container">
+                        <video loop muted class="project-video">
+                            <source src="demo/x22.mkv" type="video/mp4">
+                        </video>
+                        <div class="play-hint">Tutorial</div>
+                    </div>
+                    <div class="p-8">
+                        <div class="text-[10px] uppercase tracking-widest opacity-40 mb-2">Setup / Core</div>
+                        <h4 class="text-2xl font-bold mb-3 leading-tight">Installation of X++ API & dependencies</h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">Getting started with environment variables, hardware bindings, and the core rendering loop.</p>
+                    </div>
+                </div>
+
+                <!-- Project 02: Image -->
+                <div class="project-card">
+                    <div class="media-container">
+                        <img src="web doc/gif.gif" alt="Blackhole Simulation">
+                    </div>
+                    <div class="p-8">
+                        <div class="text-[10px] uppercase tracking-widest opacity-40 mb-2">Sim_01 / Physics</div>
+                        <h4 class="text-2xl font-bold mb-3 leading-tight">Blackhole Simulation</h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">General relativity visualization and photon sphere ray-tracing at interactive framerates.</p>
+                    </div>
+                </div>
+
+                <!-- Project 03: Video -->
+                <div class="project-card">
+                    <div class="media-container">
+                        <video loop muted class="project-video">
+                            <source src="demo/pong.mkv" type="video/mp4">
+                        </video>
+                        <div class="play-hint"></div>
+                    </div>
+                    <div class="p-8">
+                        <div class="text-[10px] uppercase tracking-widest opacity-40 mb-2">Sim_02 / Chem</div>
+                        <h4 class="text-2xl font-bold mb-3 leading-tight">Molecular Dynamics Simulator</h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">N-body interaction simulator for chemical bonds and crystalline lattice structures.</p>
+                    </div>
+                </div>
+
+                <!-- Project 04: Game Project -->
+                <div class="project-card">
+                    <div class="media-container">
+                       <video loop muted class="project-video">
+                            <source src="demo/snake.mkv" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="p-8">
+                        <div class="text-[10px] uppercase tracking-widest opacity-40 mb-2">Sim_03 / Games</div>
+                        <h4 class="text-2xl font-bold mb-3 leading-tight">X++ Game Framework</h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">A specialized layer for sprite batching, collision detection, and entity component systems.</p>
+                    </div>
+                </div>
+
+                <!-- Project 05: DNA -->
+                <div class="project-card">
+                    <video loop muted class="project-video">
+                    <source src="demo/x++.mkv">
+                   </video>
+                    <div class="p-8">
+                        <div class="text-[10px] uppercase tracking-widest opacity-40 mb-2">Sim_04 / Biology</div>
+                        <h4 class="text-2xl font-bold mb-3 leading-tight">DNA Structure Analysis</h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">Visualizing double-helix sequencing and base-pair connections using procedural shaders.</p>
+                    </div>
+                </div>
+
+                <!-- Project 06: Image -->
+                <div class="project-card">
+                    <div class="media-container">
+                    <video loop muted class="project-video">
+                    <source src="demo/particle.mkv">
+                   </video>
+                    </div>
+                    <div class="p-8">
+                        <div class="text-[10px] uppercase tracking-widest opacity-40 mb-2">Sim_05 / Bio-Design</div>
+                        <h4 class="text-2xl font-bold mb-3 leading-tight">DNA Synthetic Synthesis</h4>
+                        <p class="text-sm text-gray-600 leading-relaxed">Visualizing the synthesis process of artificial genetic sequences in high-fidelity 3D.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Comparison -->
+    <section class="py-24 px-6 section-divider">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border border-black">
+                <div class="p-12 flex flex-col justify-between aspect-video md:border-r border-black">
+                    <div>
+                        <h3 class="text-3xl font-bold tracking-tighter mb-4">Standard Scripting</h3>
+                        <p class="text-sm opacity-70 mb-8">Standard Python loops struggle with per-pixel calculations.</p>
+                    </div>
+                    <div class="flex items-center space-x-4 font-mono font-bold">
+                        <span class="px-2 py-1 bg-red-100 text-red-700 text-[10px] rounded">24 FPS</span>
+                    </div>
+                </div>
+                <div class="bg-black text-white p-12 flex flex-col justify-between aspect-video">
+                    <div>
+                        <h3 class="text-3xl font-bold tracking-tighter mb-4">X++ Simulation</h3>
+                        <p class="text-sm opacity-70 mb-8 text-gray-400">Leverages hardware-level bindings for high-frequency interactive systems.</p>
+                    </div>
+                    <div class="flex items-center space-x-4 font-mono font-bold">
+                        <span class="px-2 py-1 bg-green-900 text-green-400 text-[10px] rounded">144 FPS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-black bg-white">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-sm font-bold uppercase tracking-widest">X++ // Built for Discovery</div>
+            <div class="flex space-x-8 text-xs uppercase tracking-widest font-bold">
+                <a href="#" class="hover:line-through">GitHub</a>
+                <a href="#" class="hover:line-through">Wiki</a>
+                <a href="#" class="hover:line-through">Docs</a>
+            </div>
+            <div class="text-[10px] text-gray-400">© 2025 X++ GRAPHICS SYSTEM</div>
+        </div>
+    </footer>
+
+    <script>
+        // Start videos automatically
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.project-video').forEach(video => {
+                video.play().catch(() => {});
+            });
+        });
+    </script>
+</body>
+</html>
